@@ -5,6 +5,7 @@ import com.hassanemamane.springsecurity.entities.UserInfo;
 import com.hassanemamane.springsecurity.services.JwtService;
 import com.hassanemamane.springsecurity.services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationAndRegistrationController {
-    private UserInfoService userInfoService;
+    private final UserInfoService userInfoService;
     @Autowired
     private JwtService jwtService;
     @Autowired
@@ -41,5 +42,17 @@ public class AuthenticationAndRegistrationController {
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome this endpoint is not secure";
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/testusers")
+    public String testUser() {
+        return "Welcome this endpoint is for user";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/testadmins")
+    public String testAdmin() {
+        return "Welcome this endpoint is for admin";
     }
 }

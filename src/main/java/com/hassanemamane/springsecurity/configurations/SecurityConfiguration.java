@@ -41,7 +41,9 @@ public class SecurityConfiguration {
                         "/auth/users/welcome", "/auth/users/register", "/auth/user"
                 ).permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/users/**").authenticated()
+                .authorizeHttpRequests().requestMatchers("/auth/testusers/**").authenticated()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/testadmins/**").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
