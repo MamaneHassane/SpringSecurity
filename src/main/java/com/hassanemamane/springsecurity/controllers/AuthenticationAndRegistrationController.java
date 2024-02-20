@@ -55,4 +55,10 @@ public class AuthenticationAndRegistrationController {
     public String testAdmin() {
         return "Welcome this endpoint is for admin";
     }
+
+    @PreAuthorize("hasAnyAuthority({'USER','ADMIN'})")
+    @GetMapping("/testall")
+    public String testAll() {
+        return "Welcome this endpoint is for user and admin";
+    }
 }

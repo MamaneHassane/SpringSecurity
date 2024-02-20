@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/testusers/**").authenticated()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/auth/testadmins/**").authenticated()
+                .authorizeHttpRequests().requestMatchers("/auth/testadmins/**", "/auth/testall").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
